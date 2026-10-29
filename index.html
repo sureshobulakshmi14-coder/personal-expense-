@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Expense Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      text-align: center;
+      padding: 40px 15px;
+    }
+    .container {
+      max-width: 450px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px #0001;
+    }
+    input, button {
+      padding: 12px;
+      margin: 6px;
+      border-radius: 7px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    li {
+      text-align: left;
+      margin: 12px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Personal Expense Tracker</h1>
+    <p>Track your daily expenses</p>
+    <input id="description" placeholder="Expense name">
+    <input id="amount" type="number" placeholder="Amount">
+    <button onclick="addExpense()">Add Expense</button>
+    <h2>Total: ₹<span id="total">0</span></h2>
+    <ul id="expenses"></ul>
+  </div>
+
+  <script>
+    let total = 0;
+
+    function addExpense() {
+      const description = document.getElementById("description").value.trim();
+      const amount = Number(document.getElementById("amount").value);
+
+      if (!description || amount <= 0 || !Number.isFinite(amount)) {
+        alert("Enter an expense name and a valid amount.");
+        return;
+      }
+
+      total += amount;
+      document.getElementById("total").textContent = total.toFixed(2);
+
+      const item = document.createElement("li");
+      item.textContent = description + " - ₹" + amount.toFixed(2);
+      document.getElementById("expenses").appendChild(item);
+
+      document.getElementById("description").value = "";
+      document.getElementById("amount").value = "";
+    }
+  </script>
+</body>
+</html>
